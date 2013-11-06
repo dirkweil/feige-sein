@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<glassfish-ejb-jar>
+  <disable-nonportable-jndi-names>true</disable-nonportable-jndi-names>
+</glassfish-ejb-jar>
