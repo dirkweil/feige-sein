@@ -22,7 +22,7 @@ public class Waehrung extends StringIdEntity
 {
   private static final long  serialVersionUID = 1L;
 
-  public static final String TABLE_NAME       = "SUT_SIMPLE_WAEHRUNG";
+  public static final String TABLE_NAME       = "FEIGE_SEIN_WAEHRUNG";
 
   @Column(precision = 10, scale = 4)
   private BigDecimal         euroValue;

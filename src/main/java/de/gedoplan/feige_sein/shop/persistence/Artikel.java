@@ -22,7 +22,7 @@ public class Artikel extends GeneratedLongIdEntity
 {
   private static final long  serialVersionUID = 1L;
 
-  public static final String TABLE_NAME       = "SUT_SIMPLE_ARTIKEL";
+  public static final String TABLE_NAME       = "FEIGE_SEIN_ARTIKEL";
 
   @NotNull
   @NotEmpty

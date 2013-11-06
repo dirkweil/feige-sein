@@ -17,7 +17,7 @@ public class Bestellposition extends GeneratedLongIdEntity
 {
   private static final long  serialVersionUID = 1L;
 
-  public static final String TABLE_NAME       = "SUT_SIMPLE_BESTELLPOS";
+  public static final String TABLE_NAME       = "FEIGE_SEIN_BESTELLPOS";
 
   @Min(1)
   private int                anzahl;
