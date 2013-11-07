@@ -4,7 +4,6 @@ import de.gedoplan.feige_sein.test.base.InContainerIntegrationTest;
 import de.gedoplan.feige_sein.test.data.TestLevel;
 import de.gedoplan.feige_sein.test.data.WaehrungTestDataService;
 import de.gedoplan.feige_sein.waehrung.persistence.Waehrung;
-import de.gedoplan.feige_sein.waehrung.service.WaehrungService;
 
 import java.math.BigDecimal;
 
@@ -24,17 +23,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WaehrungServiceGroupTest extends InContainerIntegrationTest
+public class WaehrungServiceMultiTest extends InContainerIntegrationTest
 {
   protected static CdiContainer cdiContainer;
 
   @BeforeClass
   public static void beforeClass()
   {
-    // JUL in slf4j umleiten (und damit am Ende in log4j). Achtung: Dies ist für Produktion zu inperformant!
-    //    SLF4JBridgeHandler.removeHandlersForRootLogger();
-    //    SLF4JBridgeHandler.install();
-
     // CDI-Container starten
     cdiContainer = CdiContainerLoader.getCdiContainer();
     cdiContainer.boot();
@@ -68,7 +63,6 @@ public class WaehrungServiceGroupTest extends InContainerIntegrationTest
   WaehrungService waehrungService;
 
   @Test
-  //  @Ignore("CDI Container startet in GlassFish-Profilen nicht")
   public void testUmrechnenUSD()
   {
     BigDecimal fremdBetrag = new BigDecimal(10000);
