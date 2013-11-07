@@ -104,7 +104,7 @@ public class ShopGuiIntegrationTest extends RemoteIntegrationTest
 
     new Select(this.webDriver.findElement(By.id("form:bestellpositionen:1:artikel"))).selectByVisibleText(bestellposition1.getArtikel().getName());
 
-    ShopGuiIntegrationTest.this.webDriver.findElement(By.id("form:save")).click();
+    this.webDriver.findElement(By.id("form:save")).click();
 
     ShopGuiIntegrationTestInspectorRemote inspector = ServiceLocator.getEjb(
         ShopGuiIntegrationTestInspectorRemote.class, null, deploymentUnitName, ShopGuiIntegrationTestInspector.class.getSimpleName());

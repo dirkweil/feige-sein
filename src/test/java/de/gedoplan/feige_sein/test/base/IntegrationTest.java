@@ -47,8 +47,6 @@ public class IntegrationTest
     archive.addAsResource("META-INF/beans.xml");
     archive.addAsResource("integrationtest/persistence.xml", "META-INF/persistence.xml");
 
-    //    archive.addAsWebInfResource(new File("src/main/resources/META-INF/beans.xml"));
-
     // Benötige Bibiotheken hinzufügen
     File[] dependencies = Maven.resolver().offline().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile();
     archive.addAsLibraries(dependencies);
