@@ -25,7 +25,7 @@ import org.junit.Test;
 
 public class WaehrungServiceMultiTest extends InContainerIntegrationTest
 {
-  protected static CdiContainer cdiContainer;
+  private static CdiContainer cdiContainer;
 
   @BeforeClass
   public static void beforeClass()
