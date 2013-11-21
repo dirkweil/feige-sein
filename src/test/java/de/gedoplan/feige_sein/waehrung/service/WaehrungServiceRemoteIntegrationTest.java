@@ -5,8 +5,6 @@ import de.gedoplan.feige_sein.test.base.RemoteIntegrationTest;
 import de.gedoplan.feige_sein.test.data.TestLevel;
 import de.gedoplan.feige_sein.test.data.WaehrungTestDataService;
 import de.gedoplan.feige_sein.waehrung.persistence.Waehrung;
-import de.gedoplan.feige_sein.waehrung.service.WaehrungService;
-import de.gedoplan.feige_sein.waehrung.service.WaehrungServiceRemote;
 
 import java.math.BigDecimal;
 
@@ -29,7 +27,7 @@ public class WaehrungServiceRemoteIntegrationTest extends RemoteIntegrationTest
     // Zu testende Klassen im Archiv aufnehmen
     archive.addClasses(WaehrungService.class, WaehrungServiceRemote.class);
 
-    //    System.out.println(archive.toString(true));
+    System.out.println(archive.toString(true));
 
     return archive;
   }

@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.UUID;
 
+import org.jboss.shrinkwrap.api.ArchivePath;
+import org.jboss.shrinkwrap.api.Filter;
+import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
@@ -23,9 +26,11 @@ public class IntegrationTest
     WebArchive archive = ShrinkWrap.create(WebArchive.class, deploymentUnitName + ".war");
 
     // Persistente Klassen und Repositories ins Archiv aufnehmen
-    archive.addPackages(true, EntityManagerProducer.class.getPackage());
-    archive.addPackages(true, Waehrung.class.getPackage());
-    archive.addPackages(true, Artikel.class.getPackage());
+    // TODO: Testklassen ausnehmen. Sollte eigentlich alle Klassen aus dem Test-Classpath aussortieren. Ging aber erstmal nur mit Pattern.
+    Filter<ArchivePath> excludeTestClasses = Filters.exclude(".*Test\\.class");
+    archive.addPackages(true, excludeTestClasses, EntityManagerProducer.class.getPackage());
+    archive.addPackages(true, excludeTestClasses, Waehrung.class.getPackage());
+    archive.addPackages(true, excludeTestClasses, Artikel.class.getPackage());
 
     // Unterstützende Klassen hinzufügen
     archive.addPackages(true, MasterTestDataService.class.getPackage());
@@ -53,5 +58,4 @@ public class IntegrationTest
 
     return archive;
   }
-
 }
