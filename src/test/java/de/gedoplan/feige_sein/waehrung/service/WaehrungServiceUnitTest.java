@@ -1,12 +1,13 @@
 package de.gedoplan.feige_sein.waehrung.service;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import de.gedoplan.feige_sein.waehrung.persistence.Waehrung;
 import de.gedoplan.feige_sein.waehrung.persistence.WaehrungRepository;
-import de.gedoplan.feige_sein.waehrung.service.WaehrungService;
 
 import java.math.BigDecimal;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -32,7 +33,8 @@ public class WaehrungServiceUnitTest
 
     BigDecimal expected = fremdBetrag.multiply(USD.getEuroValue());
     BigDecimal actual = WAEHRUNG_SERVICE.umrechnen(fremdBetrag, USD.getId());
-    Assert.assertEquals("Euro-Betrag", expected, actual);
+
+    assertThat("Euro-Betrag", actual, is(expected));
   }
 
   @Test(expected = IllegalArgumentException.class)
