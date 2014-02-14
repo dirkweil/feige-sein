@@ -1,5 +1,8 @@
 package de.gedoplan.feige_sein.waehrung.service;
 
+import static org.hamcrest.number.OrderingComparison.*;
+import static org.junit.Assert.*;
+
 import de.gedoplan.baselibs.utils.remote.ServiceLocator;
 import de.gedoplan.feige_sein.test.base.RemoteIntegrationTest;
 import de.gedoplan.feige_sein.test.data.TestLevel;
@@ -11,7 +14,6 @@ import java.math.BigDecimal;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +29,7 @@ public class WaehrungServiceRemoteIntegrationTest extends RemoteIntegrationTest
     // Zu testende Klassen im Archiv aufnehmen
     archive.addClasses(WaehrungService.class, WaehrungServiceRemote.class);
 
-    System.out.println(archive.toString(true));
+    //    System.out.println(archive.toString(true));
 
     return archive;
   }
@@ -49,6 +51,6 @@ public class WaehrungServiceRemoteIntegrationTest extends RemoteIntegrationTest
     WaehrungServiceRemote waehrungService = ServiceLocator.getEjb(WaehrungServiceRemote.class, null, deploymentUnitName, WaehrungService.class.getSimpleName());
     BigDecimal actual = waehrungService.umrechnen(fremdBetrag, fremdWaehrungId);
 
-    Assert.assertEquals("Euro-Betrag", expected, actual);
+    assertThat("Euro-Betrag", actual, comparesEqualTo(expected));
   }
 }

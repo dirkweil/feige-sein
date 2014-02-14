@@ -1,5 +1,8 @@
 package de.gedoplan.feige_sein.waehrung.webservice;
 
+import static org.hamcrest.number.OrderingComparison.*;
+import static org.junit.Assert.*;
+
 import de.gedoplan.feige_sein.common.webservice.RestApplication;
 import de.gedoplan.feige_sein.test.base.RemoteIntegrationTest;
 import de.gedoplan.feige_sein.test.data.TestLevel;
@@ -7,7 +10,6 @@ import de.gedoplan.feige_sein.test.data.WaehrungTestDataService;
 import de.gedoplan.feige_sein.waehrung.persistence.Waehrung;
 import de.gedoplan.feige_sein.waehrung.service.WaehrungService;
 import de.gedoplan.feige_sein.waehrung.service.WaehrungServiceRemote;
-import de.gedoplan.feige_sein.waehrung.webservice.WaehrungRestService;
 
 import java.math.BigDecimal;
 
@@ -19,7 +21,6 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,6 +61,6 @@ public class WaehrungRestServiceIntegrationTest extends RemoteIntegrationTest
     WebTarget target = client.target(serverUrlWebContext + "/rs/waehrung/" + fremdWaehrungId + "/" + fremdBetrag);
     BigDecimal actual = target.request(MediaType.TEXT_PLAIN).get(BigDecimal.class);
 
-    Assert.assertEquals("Euro-Betrag", expected, actual);
+    assertThat("Euro-Betrag", actual, comparesEqualTo(expected));
   }
 }

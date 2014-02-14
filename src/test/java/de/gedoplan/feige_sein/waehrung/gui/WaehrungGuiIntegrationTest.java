@@ -1,5 +1,8 @@
 package de.gedoplan.feige_sein.waehrung.gui;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import de.gedoplan.feige_sein.test.base.RemoteIntegrationTest;
 import de.gedoplan.feige_sein.test.data.TestLevel;
 import de.gedoplan.feige_sein.test.data.WaehrungTestDataService;
@@ -20,7 +23,6 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -93,7 +95,7 @@ public class WaehrungGuiIntegrationTest extends RemoteIntegrationTest
     WebElement euroBetragField = this.webDriver.findElement(By.id("form:euroBetrag"));
     String actual = euroBetragField.getText();
 
-    Assert.assertEquals("Eurowert", expected, actual);
+    assertThat("Euro-Betrag", actual, is(expected));
   }
 
 }

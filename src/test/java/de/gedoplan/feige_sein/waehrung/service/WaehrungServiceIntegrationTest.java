@@ -1,5 +1,8 @@
 package de.gedoplan.feige_sein.waehrung.service;
 
+import static org.hamcrest.number.OrderingComparison.*;
+import static org.junit.Assert.*;
+
 import de.gedoplan.feige_sein.test.base.InContainerIntegrationTest;
 import de.gedoplan.feige_sein.test.data.TestLevel;
 import de.gedoplan.feige_sein.test.data.WaehrungTestDataService;
@@ -12,7 +15,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +53,6 @@ public class WaehrungServiceIntegrationTest extends InContainerIntegrationTest
     BigDecimal expected = fremdBetrag.multiply(fremdWaehrung.getEuroValue());
 
     BigDecimal actual = this.waehrungService.umrechnen(fremdBetrag, fremdWaehrungId);
-    Assert.assertEquals("Euro-Betrag", expected, actual);
+    assertThat("Euro-Betrag", actual, comparesEqualTo(expected));
   }
 }

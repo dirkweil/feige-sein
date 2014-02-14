@@ -1,6 +1,6 @@
 package de.gedoplan.feige_sein.waehrung.service;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.number.OrderingComparison.*;
 import static org.junit.Assert.*;
 
 import de.gedoplan.feige_sein.waehrung.persistence.Waehrung;
@@ -34,7 +34,7 @@ public class WaehrungServiceUnitTest
     BigDecimal expected = fremdBetrag.multiply(USD.getEuroValue());
     BigDecimal actual = WAEHRUNG_SERVICE.umrechnen(fremdBetrag, USD.getId());
 
-    assertThat("Euro-Betrag", actual, is(expected));
+    assertThat("Euro-Betrag", actual, comparesEqualTo(expected));
   }
 
   @Test(expected = IllegalArgumentException.class)
