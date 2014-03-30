@@ -10,15 +10,10 @@ import de.gedoplan.feige_sein.waehrung.persistence.Waehrung;
 
 import java.math.BigDecimal;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
-import org.apache.deltaspike.cdise.api.ContextControl;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -37,27 +32,23 @@ public class WaehrungServiceMultiTest extends InContainerIntegrationTest
     cdiContainer.boot();
 
     // Standard-Kontexte starten
-    ContextControl contextControl = cdiContainer.getContextControl();
-    contextControl.startContext(RequestScoped.class);
-    contextControl.startContext(SessionScoped.class);
-    contextControl.startContext(ConversationScoped.class);
-    contextControl.startContext(ApplicationScoped.class);
+    cdiContainer.getContextControl().startContexts();
   }
 
   @AfterClass
   public static void afterClass()
   {
+    // CDI-Container stoppen
     cdiContainer.shutdown();
   }
 
   @Before
   public void before()
   {
-    if (this.waehrungService == null)
-    {
-      BeanProvider.injectFields(this);
-    }
+    // Injektionen in this ausführen
+    BeanProvider.injectFields(this);
 
+    // Testdaten in DB laden
     loadTestData(TestLevel.WAEHRUNG.ordinal());
   }
 

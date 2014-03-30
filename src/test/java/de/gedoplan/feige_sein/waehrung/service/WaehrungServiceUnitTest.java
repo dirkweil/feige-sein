@@ -14,16 +14,18 @@ import org.mockito.Mockito;
 
 public class WaehrungServiceUnitTest
 {
-  private static final Waehrung           USD                 = new Waehrung("USD", new BigDecimal("0.8341"));
-  private static final WaehrungRepository WAEHRUNG_REPOSITORY = Mockito.mock(WaehrungRepository.class);
-
-  private static final WaehrungService    WAEHRUNG_SERVICE    = new WaehrungService();
+  private static final Waehrung     USD = new Waehrung("USD", new BigDecimal("0.8341"));
+  private static WaehrungRepository waehrungRepository;
+  private static WaehrungService    waehrungService;
 
   @BeforeClass
   public static void beforeClass()
   {
-    Mockito.when(WAEHRUNG_REPOSITORY.findById("USD")).thenReturn(USD);
-    WAEHRUNG_SERVICE.waehrungRepository = WAEHRUNG_REPOSITORY;
+    waehrungRepository = Mockito.mock(WaehrungRepository.class);
+    Mockito.when(waehrungRepository.findById("USD")).thenReturn(USD);
+
+    waehrungService = new WaehrungService();
+    waehrungService.waehrungRepository = waehrungRepository;
   }
 
   @Test
@@ -32,7 +34,7 @@ public class WaehrungServiceUnitTest
     BigDecimal fremdBetrag = new BigDecimal(100);
 
     BigDecimal expected = fremdBetrag.multiply(USD.getEuroValue());
-    BigDecimal actual = WAEHRUNG_SERVICE.umrechnen(fremdBetrag, USD.getId());
+    BigDecimal actual = waehrungService.umrechnen(fremdBetrag, USD.getId());
 
     assertThat("Euro-Betrag", actual, comparesEqualTo(expected));
   }
@@ -41,7 +43,7 @@ public class WaehrungServiceUnitTest
   public void testUmrechnenNUL()
   {
     BigDecimal fremdBetrag = new BigDecimal(100);
-    WAEHRUNG_SERVICE.umrechnen(fremdBetrag, "NUL");
+    waehrungService.umrechnen(fremdBetrag, "NUL");
   }
 
 }
