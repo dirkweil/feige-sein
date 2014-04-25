@@ -49,6 +49,7 @@
     <deltaspike.version>0.4</deltaspike.version>
     <h2.version>1.3.171</h2.version>
     <hibernate.version>4.3.0.Beta4</hibernate.version>
+    <selenium.version>2.35.0</selenium.version>
     <weld.version>2.1.0.CR1</weld.version>
     <wildfly.version>8.0.0.Final</wildfly.version>
 
@@ -90,6 +91,14 @@
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-all</artifactId>
         <version>1.3</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.arquillian.selenium</groupId>
+        <artifactId>selenium-bom</artifactId>
+        <version>${selenium.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
 
       <dependency>
@@ -514,6 +523,7 @@
       <id>astest_browser_firefox</id>
       <properties>
         <arquillian.webdriver.browser>firefox</arquillian.webdriver.browser>
+        <selenium.version>2.39.0</selenium.version>
       </properties>
     </profile>
 
