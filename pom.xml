@@ -54,7 +54,7 @@
     <hibernate.version>4.3.0.Beta4</hibernate.version>
     <selenium.version>2.35.0</selenium.version>
     <weld.version>2.1.0.CR1</weld.version>
-    <wildfly.version>8.0.0.Final</wildfly.version>
+    <wildfly.version>8.1.0.Final</wildfly.version>
 
     <arquillian.container.qualifier>unspecified</arquillian.container.qualifier>
     <arquillian.container.config><![CDATA[
