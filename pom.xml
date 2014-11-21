@@ -542,7 +542,9 @@
       <id>astest_browser_firefox</id>
       <properties>
         <arquillian.webdriver.browser>firefox</arquillian.webdriver.browser>
+        <!-- 
         <selenium.version>2.43.0</selenium.version>
+         -->
       </properties>
     </profile>
 
