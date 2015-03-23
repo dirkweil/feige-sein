@@ -1,7 +1,5 @@
 package de.gedoplan.feige_sein.shop.persistence;
 
-import de.gedoplan.feige_sein.shop.persistence.Artikel;
-import de.gedoplan.feige_sein.shop.persistence.ArtikelRepository;
 import de.gedoplan.feige_sein.test.base.InContainerIntegrationTest;
 import de.gedoplan.feige_sein.test.data.ShopTestDataService;
 import de.gedoplan.feige_sein.test.data.TestLevel;
@@ -29,10 +27,11 @@ public class ArtikelRepositoryIntegrationTest extends InContainerIntegrationTest
     WebArchive archive = InContainerIntegrationTest.createInContainerTestDeployment();
 
     // TODO Redundanz zum POM. Sollte einfacher gehen.
-    // Achtung: importRuntimeDependencies().resolve() enthält zu viel. Schön wäre, wenn man nur die Test-Dependencies des pom.xml ohne sein Parent auflösen könnte-
+    // Achtung: importRuntimeDependencies().resolve() enthält zu viel. Schön wäre, wenn man nur die Test-Dependencies des pom.xml
+    // ohne sein Parent auflösen könnte-
     archive.addAsLibraries(Maven.resolver().offline().loadPomFromFile("pom.xml").resolve("org.unitils:unitils-core").withTransitivity().asFile());
 
-    //    System.out.println(archive.toString(true));
+    // System.out.println(archive.toString(true));
 
     return archive;
   }
