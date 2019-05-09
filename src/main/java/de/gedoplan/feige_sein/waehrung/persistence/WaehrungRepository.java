@@ -3,6 +3,7 @@ package de.gedoplan.feige_sein.waehrung.persistence;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -16,28 +17,25 @@ import javax.transaction.Transactional;
  * @author dw
  *
  */
+@ApplicationScoped
 @Transactional
-public class WaehrungRepository //extends SingleIdEntityRepository<String, Waehrung>
-    implements Serializable
-{
+public class WaehrungRepository // extends SingleIdEntityRepository<String, Waehrung>
+    implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Inject
-  EntityManager             entityManager;
+  EntityManager entityManager;
 
-  public void persist(Waehrung entity)
-  {
-    this.entityManager.persist(entity);
+  public void persist(Waehrung entity) {
+    entityManager.persist(entity);
   }
 
-  public List<Waehrung> findAll()
-  {
-    return this.entityManager.createQuery("select x from Waehrung x", Waehrung.class).getResultList();
+  public List<Waehrung> findAll() {
+    return entityManager.createQuery("select x from Waehrung x", Waehrung.class).getResultList();
   }
 
-  public Waehrung findById(String id)
-  {
-    return this.entityManager.find(Waehrung.class, id);
+  public Waehrung findById(String id) {
+    return entityManager.find(Waehrung.class, id);
   }
 
 }

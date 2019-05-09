@@ -1,7 +1,7 @@
 package de.gedoplan.feige_sein.waehrung.service;
 
-import static org.hamcrest.number.OrderingComparison.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.number.OrderingComparison.comparesEqualTo;
+import static org.junit.Assert.assertThat;
 
 import de.gedoplan.baselibs.utils.remote.ServiceLocator;
 import de.gedoplan.feige_sein.test.base.RemoteIntegrationTest;
@@ -19,30 +19,26 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class WaehrungServiceRemoteIntegrationTest extends RemoteIntegrationTest
-{
+public class WaehrungServiceRemoteIntegrationTest extends RemoteIntegrationTest {
   @Deployment(testable = false)
-  public static WebArchive createDeployment()
-  {
+  public static WebArchive createDeployment() {
     WebArchive archive = RemoteIntegrationTest.createRemoteTestDeployment();
 
     // Zu testende Klassen im Archiv aufnehmen
     archive.addClasses(WaehrungService.class, WaehrungServiceRemote.class);
 
-    //    System.out.println(archive.toString(true));
+    System.out.println(archive.toString(true));
 
     return archive;
   }
 
   @BeforeClass
-  public static void beforeClass()
-  {
+  public static void beforeClass() {
     loadTestData(TestLevel.WAEHRUNG.ordinal());
   }
 
   @Test
-  public void testUmrechnenUSD()
-  {
+  public void testUmrechnenUSD() {
     BigDecimal fremdBetrag = new BigDecimal(10000);
     Waehrung fremdWaehrung = WaehrungTestDataService.WAEHRUNG_USD;
     String fremdWaehrungId = fremdWaehrung.getId();

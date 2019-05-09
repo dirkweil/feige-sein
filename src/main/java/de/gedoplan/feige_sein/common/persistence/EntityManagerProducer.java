@@ -8,9 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @ApplicationScoped
-public class EntityManagerProducer
-{
-  @PersistenceContext(unitName = "seminar")
+public class EntityManagerProducer {
+  @PersistenceContext(unitName = "showcase")
   @Produces
   private EntityManager entityManager;
 }
