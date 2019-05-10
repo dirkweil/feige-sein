@@ -18,63 +18,54 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.FIELD)
 @Table(name = Artikel.TABLE_NAME)
-public class Artikel extends GeneratedLongIdEntity
-{
-  private static final long  serialVersionUID = 1L;
+public class Artikel extends GeneratedLongIdEntity {
+  private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME       = "FEIGE_SEIN_ARTIKEL";
+  public static final String TABLE_NAME = "FEIGE_SEIN_ARTIKEL";
 
   @NotNull
   @NotEmpty
-  private String             name;
+  private String name;
 
   @NotNull
   @DecimalMin("0")
   @Column(precision = 10, scale = 4)
-  private BigDecimal         preis;
+  private BigDecimal preis;
 
   @NotNull
   @ManyToOne
-  private Waehrung           waehrung;
+  private Waehrung waehrung;
 
-  public Artikel(String name, BigDecimal preis, Waehrung waehrung)
-  {
+  public Artikel(String name, BigDecimal preis, Waehrung waehrung) {
     this.name = name;
     this.preis = preis;
     this.waehrung = waehrung;
   }
 
-  protected Artikel()
-  {
+  protected Artikel() {
   }
 
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
-  public BigDecimal getPreis()
-  {
+  public BigDecimal getPreis() {
     return this.preis;
   }
 
-  public void setPreis(BigDecimal preis)
-  {
+  public void setPreis(BigDecimal preis) {
     this.preis = preis;
   }
 
-  public Waehrung getWaehrung()
-  {
+  public Waehrung getWaehrung() {
     return this.waehrung;
   }
 
-  public void setWaehrung(Waehrung waehrung)
-  {
+  public void setWaehrung(Waehrung waehrung) {
     this.waehrung = waehrung;
   }
 }

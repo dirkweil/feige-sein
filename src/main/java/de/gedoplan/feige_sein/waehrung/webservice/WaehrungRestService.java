@@ -18,27 +18,23 @@ import javax.ws.rs.core.Response.Status;
 
 @Path("waehrung")
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-public class WaehrungRestService
-{
+public class WaehrungRestService {
   @Inject
   WaehrungRepository waehrungRepository;
 
   @Inject
-  WaehrungService    waehrungService;
+  WaehrungService waehrungService;
 
   @GET
-  public List<Waehrung> getAll()
-  {
+  public List<Waehrung> getAll() {
     return this.waehrungRepository.findAll();
   }
 
   @GET
   @Path("{id}")
-  public Waehrung getById(@PathParam("id") String id)
-  {
+  public Waehrung getById(@PathParam("id") String id) {
     Waehrung waehrung = this.waehrungRepository.findById(id);
-    if (waehrung != null)
-    {
+    if (waehrung != null) {
       return waehrung;
     }
 
@@ -48,8 +44,7 @@ public class WaehrungRestService
   @GET
   @Path("{id}/{amount}")
   @Produces({ MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-  public BigDecimal getEuro(@PathParam("id") String id, @PathParam("amount") BigDecimal amount)
-  {
+  public BigDecimal getEuro(@PathParam("id") String id, @PathParam("amount") BigDecimal amount) {
     return this.waehrungService.umrechnen(amount, id);
   }
 

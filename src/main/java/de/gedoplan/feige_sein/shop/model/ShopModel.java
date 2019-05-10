@@ -17,76 +17,66 @@ import javax.inject.Inject;
 
 @Model
 @ConversationScoped
-public class ShopModel implements Serializable
-{
+public class ShopModel implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Inject
-  Conversation              conversation;
+  Conversation conversation;
 
   @Inject
-  ArtikelRepository         artikelRepository;
+  ArtikelRepository artikelRepository;
 
-  private List<Artikel>     artikelList;
+  private List<Artikel> artikelList;
 
   @Inject
-  BestellungRepository      bestellungRepository;
+  BestellungRepository bestellungRepository;
 
-  private List<Bestellung>  bestellungen;
+  private List<Bestellung> bestellungen;
 
   @PostConstruct
-  private void postConstruct()
-  {
+  private void postConstruct() {
     this.artikelList = this.artikelRepository.findAll();
     this.bestellungen = this.bestellungRepository.findAll();
   }
 
-  public List<Artikel> getArtikelList()
-  {
+  public List<Artikel> getArtikelList() {
     return this.artikelList;
   }
 
-  public List<Bestellung> getBestellungen()
-  {
+  public List<Bestellung> getBestellungen() {
     return this.bestellungen;
   }
 
   private Bestellung bestellung;
 
-  public Bestellung getBestellung()
-  {
+  public Bestellung getBestellung() {
     return this.bestellung;
   }
 
-  public String editBestellung(Bestellung bestellung)
-  {
+  public String editBestellung(Bestellung bestellung) {
     this.conversation.begin();
     this.bestellung = bestellung;
     return "edit";
   }
 
-  public String createBestellung()
-  {
+  public String createBestellung() {
     this.conversation.begin();
     this.bestellung = new Bestellung(null);
     return "edit";
   }
 
-  public String saveBestellung()
-  {
+  public String saveBestellung() {
     this.bestellungRepository.merge(this.bestellung);
     this.conversation.end();
     return "ok";
   }
 
-  public String cancelBestellung()
-  {
+  public String cancelBestellung() {
     this.conversation.end();
     return "ok";
   }
 
-  public void addBestellposition()
-  {
+  public void addBestellposition() {
     this.bestellung.getBestellpositionen().add(new Bestellposition(0, null));
   }
 }

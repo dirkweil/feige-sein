@@ -13,46 +13,39 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.FIELD)
 @Table(name = Bestellposition.TABLE_NAME)
-public class Bestellposition extends GeneratedLongIdEntity
-{
-  private static final long  serialVersionUID = 1L;
+public class Bestellposition extends GeneratedLongIdEntity {
+  private static final long serialVersionUID = 1L;
 
-  public static final String TABLE_NAME       = "FEIGE_SEIN_BESTELLPOS";
+  public static final String TABLE_NAME = "FEIGE_SEIN_BESTELLPOS";
 
   @Min(1)
-  private int                anzahl;
+  private int anzahl;
 
   @NotNull
   @ManyToOne
-  private Artikel            artikel;
+  private Artikel artikel;
 
-  public Bestellposition(int anzahl, Artikel artikel)
-  {
+  public Bestellposition(int anzahl, Artikel artikel) {
     this.anzahl = anzahl;
     this.artikel = artikel;
   }
 
-  protected Bestellposition()
-  {
+  protected Bestellposition() {
   }
 
-  public int getAnzahl()
-  {
+  public int getAnzahl() {
     return this.anzahl;
   }
 
-  public void setAnzahl(int anzahl)
-  {
+  public void setAnzahl(int anzahl) {
     this.anzahl = anzahl;
   }
 
-  public Artikel getArtikel()
-  {
+  public Artikel getArtikel() {
     return this.artikel;
   }
 
-  public void setArtikel(Artikel artikel)
-  {
+  public void setArtikel(Artikel artikel) {
     this.artikel = artikel;
   }
 

@@ -32,11 +32,9 @@ import org.openqa.selenium.support.ui.Select;
 
 @RunAsClient
 @RunWith(Arquillian.class)
-public class ShopGuiIntegrationTest extends RemoteIntegrationTest
-{
+public class ShopGuiIntegrationTest extends RemoteIntegrationTest {
   @Deployment(testable = false)
-  public static WebArchive createDeployment()
-  {
+  public static WebArchive createDeployment() {
     WebArchive archive = RemoteIntegrationTest.createRemoteTestDeployment();
 
     // Zu testende Klassen im Archiv aufnehmen
@@ -48,32 +46,29 @@ public class ShopGuiIntegrationTest extends RemoteIntegrationTest
     // Inspektoren aufnehmen
     archive.addClasses(ShopGuiIntegrationTestInspector.class, ShopGuiIntegrationTestInspectorRemote.class);
 
-    //    System.out.println(archive.toString(true));
+    // System.out.println(archive.toString(true));
 
     return archive;
   }
 
-  private static String serverUrlWeb        = TestProperties.getProperty("server.url.web", "http://localhost:8080");
+  private static String serverUrlWeb = TestProperties.getProperty("server.url.web", "http://localhost:8080");
   private static String serverUrlWebContext = serverUrlWeb + "/" + deploymentUnitName;
 
   @Drone
-  WebDriver             webDriver;
+  WebDriver webDriver;
 
   @BeforeClass
-  public static void beforeClass()
-  {
+  public static void beforeClass() {
     loadTestData(TestLevel.SHOP.ordinal());
   }
 
   @Before
-  public void before()
-  {
+  public void before() {
     this.webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
-  public void testCreateBestellung()
-  {
+  public void testCreateBestellung() {
     Bestellung expected = new Bestellung("Mustermann");
     Bestellposition bestellposition0 = new Bestellposition(2, new Artikel("Flug DUS-JFK", null, null));
     expected.getBestellpositionen().add(bestellposition0);

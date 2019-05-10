@@ -27,12 +27,12 @@ import java.io.Serializable;
  * 
  * Der Aufruf geschieht durch eine von {@link MasterTestDataService} abgeleitete EJB.
  */
-public interface TestDataService extends Serializable
-{
+public interface TestDataService extends Serializable {
   /**
    * Laden (Erzeugen) von Testdaten.
    * 
-   * @throws Exception bei Fehlern
+   * @throws Exception
+   *           bei Fehlern
    */
   public void loadTestData() throws Exception;
 
@@ -42,7 +42,8 @@ public interface TestDataService extends Serializable
    * <p/>
    * Es werden die (Test-)Daten aller Komponenten gelöscht!
    * 
-   * @throws Exception bei Fehlern
+   * @throws Exception
+   *           bei Fehlern
    */
   public void unloadTestData() throws Exception;
 

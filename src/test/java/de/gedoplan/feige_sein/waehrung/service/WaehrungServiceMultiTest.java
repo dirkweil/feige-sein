@@ -20,13 +20,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WaehrungServiceMultiTest extends InContainerIntegrationTest
-{
+public class WaehrungServiceMultiTest extends InContainerIntegrationTest {
   private static CdiContainer cdiContainer;
 
   @BeforeClass
-  public static void beforeClass()
-  {
+  public static void beforeClass() {
     // CDI-Container starten
     cdiContainer = CdiContainerLoader.getCdiContainer();
     cdiContainer.boot();
@@ -36,15 +34,13 @@ public class WaehrungServiceMultiTest extends InContainerIntegrationTest
   }
 
   @AfterClass
-  public static void afterClass()
-  {
+  public static void afterClass() {
     // CDI-Container stoppen
     cdiContainer.shutdown();
   }
 
   @Before
-  public void before()
-  {
+  public void before() {
     // Injektionen in this ausführen
     BeanProvider.injectFields(this);
 
@@ -56,8 +52,7 @@ public class WaehrungServiceMultiTest extends InContainerIntegrationTest
   WaehrungService waehrungService;
 
   @Test
-  public void testUmrechnenUSD()
-  {
+  public void testUmrechnenUSD() {
     BigDecimal fremdBetrag = new BigDecimal(10000);
     Waehrung fremdWaehrung = WaehrungTestDataService.WAEHRUNG_USD;
     String fremdWaehrungId = fremdWaehrung.getId();

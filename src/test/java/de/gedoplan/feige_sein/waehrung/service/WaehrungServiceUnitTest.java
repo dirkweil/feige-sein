@@ -12,15 +12,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-public class WaehrungServiceUnitTest
-{
-  private static final Waehrung     USD = new Waehrung("USD", new BigDecimal("0.8341"));
+public class WaehrungServiceUnitTest {
+  private static final Waehrung USD = new Waehrung("USD", new BigDecimal("0.8341"));
   private static WaehrungRepository waehrungRepository;
-  private static WaehrungService    waehrungService;
+  private static WaehrungService waehrungService;
 
   @BeforeClass
-  public static void beforeClass()
-  {
+  public static void beforeClass() {
     waehrungRepository = Mockito.mock(WaehrungRepository.class);
     Mockito.when(waehrungRepository.findById("USD")).thenReturn(USD);
 
@@ -29,8 +27,7 @@ public class WaehrungServiceUnitTest
   }
 
   @Test
-  public void testUmrechnenUSD()
-  {
+  public void testUmrechnenUSD() {
     BigDecimal fremdBetrag = new BigDecimal(100);
 
     BigDecimal expected = fremdBetrag.multiply(USD.getEuroValue());
@@ -40,8 +37,7 @@ public class WaehrungServiceUnitTest
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testUmrechnenNUL()
-  {
+  public void testUmrechnenNUL() {
     BigDecimal fremdBetrag = new BigDecimal(100);
     waehrungService.umrechnen(fremdBetrag, "NUL");
   }

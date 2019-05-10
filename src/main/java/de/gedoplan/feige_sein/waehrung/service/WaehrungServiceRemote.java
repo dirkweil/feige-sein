@@ -5,8 +5,7 @@ import java.math.BigDecimal;
 import javax.ejb.Remote;
 
 @Remote
-public interface WaehrungServiceRemote
-{
+public interface WaehrungServiceRemote {
   public BigDecimal getTauschkurs(String waehrungId);
 
   public BigDecimal umrechnen(BigDecimal betrag, String waehrungId);

@@ -17,12 +17,10 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
-public class IntegrationTest
-{
+public class IntegrationTest {
   public static final String deploymentUnitName = UUID.randomUUID().toString();
 
-  protected static WebArchive createBaseDeployment()
-  {
+  protected static WebArchive createBaseDeployment() {
     WebArchive archive = ShrinkWrap.create(WebArchive.class, deploymentUnitName + ".war");
 
     // Persistente Klassen und Repositories ins Archiv aufnehmen
@@ -37,16 +35,13 @@ public class IntegrationTest
     archive.addPackages(true, ExceptionUtil.class.getPackage());
 
     // Deskriptoren hinzufügen
-    File[] webInfDescriptors = new File("src/main/webapp/WEB-INF").listFiles(new FilenameFilter()
-    {
+    File[] webInfDescriptors = new File("src/main/webapp/WEB-INF").listFiles(new FilenameFilter() {
       @Override
-      public boolean accept(File dir, String name)
-      {
+      public boolean accept(File dir, String name) {
         return name.endsWith(".xml");
       }
     });
-    for (File webInfDescriptor : webInfDescriptors)
-    {
+    for (File webInfDescriptor : webInfDescriptors) {
       archive.addAsWebInfResource(webInfDescriptor);
     }
     archive.addAsResource("META-INF/beans.xml");

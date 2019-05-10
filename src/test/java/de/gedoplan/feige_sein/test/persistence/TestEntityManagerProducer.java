@@ -16,25 +16,21 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 @Alternative
 @Priority(1)
-public class TestEntityManagerProducer
-{
+public class TestEntityManagerProducer {
   EntityManagerFactory entityManagerFactory;
 
   @PostConstruct
-  private void postConstruct()
-  {
+  private void postConstruct() {
     this.entityManagerFactory = Persistence.createEntityManagerFactory("test");
   }
 
   @Produces
   @RequestScoped
-  EntityManager createEntityManager()
-  {
+  EntityManager createEntityManager() {
     return this.entityManagerFactory.createEntityManager();
   }
 
-  void disposeEntityManager(@Disposes EntityManager entityManager)
-  {
+  void disposeEntityManager(@Disposes EntityManager entityManager) {
     entityManager.close();
   }
 }

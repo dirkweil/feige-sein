@@ -19,11 +19,9 @@ import org.junit.runner.RunWith;
 import org.unitils.reflectionassert.ReflectionAssert;
 
 @RunWith(Arquillian.class)
-public class ArtikelRepositoryIntegrationTest extends InContainerIntegrationTest
-{
+public class ArtikelRepositoryIntegrationTest extends InContainerIntegrationTest {
   @Deployment
-  public static WebArchive createDeployment()
-  {
+  public static WebArchive createDeployment() {
     WebArchive archive = InContainerIntegrationTest.createInContainerTestDeployment();
 
     // TODO Redundanz zum POM. Sollte einfacher gehen.
@@ -37,8 +35,7 @@ public class ArtikelRepositoryIntegrationTest extends InContainerIntegrationTest
   }
 
   @Before
-  public void before()
-  {
+  public void before() {
     loadTestData(TestLevel.SHOP.ordinal());
   }
 
@@ -46,8 +43,7 @@ public class ArtikelRepositoryIntegrationTest extends InContainerIntegrationTest
   ArtikelRepository artikelRepository;
 
   @Test
-  public void testTestDataLoaded()
-  {
+  public void testTestDataLoaded() {
     List<Artikel> expected = new ArrayList<>();
     expected.add(ShopTestDataService.ARTIKEL_FLUG_DUS_JFK);
     expected.add(ShopTestDataService.ARTIKEL_HOTEL_MARRIOTT_NYC);

@@ -11,17 +11,14 @@ import javax.inject.Inject;
 
 @Stateless
 @LocalBean
-public class WaehrungService implements WaehrungServiceRemote
-{
+public class WaehrungService implements WaehrungServiceRemote {
   @Inject
   WaehrungRepository waehrungRepository;
 
   @Override
-  public BigDecimal getTauschkurs(String waehrungId)
-  {
+  public BigDecimal getTauschkurs(String waehrungId) {
     Waehrung waehrung = this.waehrungRepository.findById(waehrungId);
-    if (waehrung != null)
-    {
+    if (waehrung != null) {
       return waehrung.getEuroValue();
     }
 
@@ -29,8 +26,7 @@ public class WaehrungService implements WaehrungServiceRemote
   }
 
   @Override
-  public BigDecimal umrechnen(BigDecimal betrag, String waehrungId)
-  {
+  public BigDecimal umrechnen(BigDecimal betrag, String waehrungId) {
     return betrag.multiply(getTauschkurs(waehrungId));
   }
 

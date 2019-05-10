@@ -32,11 +32,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 @RunWith(Arquillian.class)
-public class WaehrungGuiIntegrationTest extends RemoteIntegrationTest
-{
+public class WaehrungGuiIntegrationTest extends RemoteIntegrationTest {
   @Deployment(testable = false)
-  public static WebArchive createDeployment()
-  {
+  public static WebArchive createDeployment() {
     WebArchive archive = RemoteIntegrationTest.createRemoteTestDeployment();
 
     // Zu testende Klassen im Archiv aufnehmen
@@ -45,33 +43,30 @@ public class WaehrungGuiIntegrationTest extends RemoteIntegrationTest
     archive.addAsWebResource(new File("src/main/webapp/demo/waehrungsrechner.xhtml"), "demo/waehrungsrechner.xhtml");
     archive.addAsWebResource(new File("src/main/webapp/index.html"), "index.html");
 
-    //    System.out.println(archive.toString(true));
+    // System.out.println(archive.toString(true));
 
     return archive;
   }
 
-  private static String serverUrlWeb        = TestProperties.getProperty("server.url.web", "http://localhost:8080");
+  private static String serverUrlWeb = TestProperties.getProperty("server.url.web", "http://localhost:8080");
   private static String serverUrlWebContext = serverUrlWeb + "/" + deploymentUnitName;
 
   @Drone
-  WebDriver             webDriver;
+  WebDriver webDriver;
 
   @BeforeClass
-  public static void beforeClass()
-  {
+  public static void beforeClass() {
     loadTestData(TestLevel.WAEHRUNG.ordinal());
   }
 
   @Before
-  public void before()
-  {
+  public void before() {
     this.webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
   @RunAsClient
-  public void testUmrechnenUSD()
-  {
+  public void testUmrechnenUSD() {
     BigDecimal fremdBetrag = new BigDecimal(10000);
     Waehrung fremdWaehrung = WaehrungTestDataService.WAEHRUNG_USD;
     String fremdWaehrungId = fremdWaehrung.getId();

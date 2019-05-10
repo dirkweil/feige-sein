@@ -14,38 +14,31 @@ import javax.inject.Inject;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 @FacesConverter(forClass = Artikel.class)
-public class ArtikelConverter implements Converter
-{
+public class ArtikelConverter implements Converter {
   @Inject
   ArtikelRepository artikelRepository;
 
   @Override
-  public Object getAsObject(FacesContext context, UIComponent component, String value)
-  {
-    if (value == null || value.isEmpty())
-    {
+  public Object getAsObject(FacesContext context, UIComponent component, String value) {
+    if (value == null || value.isEmpty()) {
       return null;
     }
 
     /*
      * Die Injektion von CDI Beans in Faces Converter ist leider nicht in JSF 2.2 enthalten. Mojarra 2.2.2 unterstützt
-     * @Inject schon in einigen Fällen. Falls die Injektion nicht durchgeführt wurde, Bean per DeltaSpike BeanProvider holen. 
+     * 
+     * @Inject schon in einigen Fällen. Falls die Injektion nicht durchgeführt wurde, Bean per DeltaSpike BeanProvider holen.
      */
-    if (this.artikelRepository == null)
-    {
+    if (this.artikelRepository == null) {
       this.artikelRepository = BeanProvider.getContextualReference(ArtikelRepository.class);
     }
 
-    try
-    {
+    try {
       Artikel artikel = this.artikelRepository.findById(Long.valueOf(value));
-      if (artikel != null)
-      {
+      if (artikel != null) {
         return artikel;
       }
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
     }
 
     FacesMessage msg = new FacesMessage("Unbekannter Artikel: " + value);
@@ -54,13 +47,10 @@ public class ArtikelConverter implements Converter
   }
 
   @Override
-  public String getAsString(FacesContext context, UIComponent component, Object value)
-  {
-    if (value instanceof Artikel)
-    {
+  public String getAsString(FacesContext context, UIComponent component, Object value) {
+    if (value instanceof Artikel) {
       Artikel artikel = (Artikel) value;
-      if (artikel.getId() != null)
-      {
+      if (artikel.getId() != null) {
         return artikel.getId().toString();
       }
     }

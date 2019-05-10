@@ -20,24 +20,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class WaehrungServiceIntegrationTest extends InContainerIntegrationTest
-{
+public class WaehrungServiceIntegrationTest extends InContainerIntegrationTest {
   @Deployment
-  public static WebArchive createDeployment()
-  {
+  public static WebArchive createDeployment() {
     WebArchive archive = InContainerIntegrationTest.createInContainerTestDeployment();
 
     // Zu testende Klassen im Archiv aufnehmen
     archive.addClasses(WaehrungService.class, WaehrungServiceRemote.class);
 
-    //    System.out.println(archive.toString(true));
+    // System.out.println(archive.toString(true));
 
     return archive;
   }
 
   @Before
-  public void before()
-  {
+  public void before() {
     loadTestData(TestLevel.WAEHRUNG.ordinal());
   }
 
@@ -45,8 +42,7 @@ public class WaehrungServiceIntegrationTest extends InContainerIntegrationTest
   WaehrungService waehrungService;
 
   @Test
-  public void testUmrechnenUSD()
-  {
+  public void testUmrechnenUSD() {
     BigDecimal fremdBetrag = new BigDecimal(10000);
     Waehrung fremdWaehrung = WaehrungTestDataService.WAEHRUNG_USD;
     String fremdWaehrungId = fremdWaehrung.getId();
